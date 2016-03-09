@@ -1,1 +1,17 @@
 .mdi-plus-circle:before{display:block;margin-top:4px;}
+
+/*
+  REVIEW:
+	- Fascinating material presented in a way that leaves a bit to be desired.
+		Inconsistency: In one lecture, we get the long text used in the example available for an immediate copy-pasting. In another, we are encouraged to pause the video and type what's on screen. A uniform approach would be easier to understand.
+
+		Quiz:
+		It would help to know that I am expected to use external resources before I am presented with a list of questions.		
+
+		Touching upon subjects without explaining them:
+		What is "use strict"? Why are we duly writing it everywhere?
+		What is "layout-padding" and what parameters does it accept, if any?
+		
+		
+		I understand that there is Google for things like that. But there is Google for things like "how to create an AngularJS app from scratch", too. Free resources being sloppy is one thing, but the ones that take my money is another. I find that the thin line between "Let me show you how to learn it" and "Google everything yourself" is drawn too close to the latter for my money.
+*/

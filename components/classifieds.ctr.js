@@ -4,27 +4,37 @@
 	
 	angular
 		.module("ngClassifieds")
-		.controller("classifiedsCtrl", function($scope, $http, classifiedsFactory){		
+		.controller("classifiedsCtrl", function($scope, $http, classifiedsFactory, $mdSidenav){		
 			classifiedsFactory.getClassifieds().then(function(classifieds){
 				$scope.classifieds = classifieds.data;
-				// classifieds.data - because from the file we receive the  "classifieds" object,
-				// and this object has the "data" property: a collection of our 6 ads
 			});
+			
+			$scope.saveClassified = function(classified){
+				if (classified){
+					$scope.classifieds.push(classified);
+					$scope.classified = {}; // empty the input form
+					$scope.closeSidebar();
+					
+				}
+			}
 
-			$scope.name = {
-				first: 'Roman',
-				last: 'Kaye'
-			};
+
+			$scope.openSidebar = function(){
+				$mdSidenav('left').open();
+			}
+			$scope.closeSidebar = function(){
+				$mdSidenav('left').close();
+			}
 			
 			$scope.meta = {
 				visibleTitle : "ngClassifieds"
-			};
-
+			}
+/*
 			$scope.message = {
 				title: "Directive comes from app.js", 
 				para: "Value of the message in the directive comes from ctr file"
-			};
-
+			}
+*/
 		});
 
 	

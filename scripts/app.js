@@ -2,14 +2,14 @@ angular
 	.module("ngClassifieds", ["ngMaterial"])
 	.config(function($mdThemingProvider){
 		$mdThemingProvider.theme("default")
-			.primaryPalette("teal")
+			.primaryPalette("indigo")
 			.accentPalette("orange");
 
 
 	})
 	.directive("oogaBooga", function(){
 		return {
-			// camelCase name gets converted to ooga-booga ("kebab case")
+			// camelCase name gets converted to ooga-booga (kebab-case)
 			// Here we return an object known as
 			// the directive definition object
 			template: "<h1>{{ message.title }}</h1><p>{{ message.para }}</p>"
@@ -52,7 +52,7 @@ Data API
 	Front end is self-contained
 	Two machines: one in the browser, the other on the server
 	RESTful API
-		RESTul = we can dig deeper. Kinda like dot-notation-API.
+		RESTful = we can dig deeper. Kinda like dot-notation-API.
 
 HTTP Requests and Promises
 	
