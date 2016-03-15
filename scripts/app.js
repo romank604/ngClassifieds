@@ -1,12 +1,17 @@
 angular
-	.module("ngClassifieds", ["ngMaterial"])
-	.config(function($mdThemingProvider){
-		$mdThemingProvider.theme("default")
-			.primaryPalette("indigo")
-			.accentPalette("orange");
-
-
-	})
+	.module('ngClassifieds', ['ngMaterial', 'ui.router'])
+	.config(function($mdThemingProvider,$stateProvider){
+		$mdThemingProvider.theme('default')
+			.primaryPalette('indigo')
+			.accentPalette('orange');
+		$stateProvider
+			.state('classifieds', {
+				controller: 'classifiedsCtrl as vm',
+				url: '/classifieds',
+				templateUrl: 'components/classifieds/classifieds.tpl.html'
+			});
+	});
+/*
 	.directive("oogaBooga", function(){
 		return {
 			// camelCase name gets converted to ooga-booga (kebab-case)
@@ -15,7 +20,7 @@ angular
 			template: "<h1>{{ message.title }}</h1><p>{{ message.para }}</p>"
 		}
 	});
-
+*/
 /*
 <!--
 MVC:

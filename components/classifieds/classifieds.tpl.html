@@ -1,0 +1,123 @@
+<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h1>ngClassifieds</h1>
+			<md-button ng-click="vm.openSidebar();">
+				<md-icon class="mdi mdi-plus-circle"></md-icon>
+				Add your ad
+			</md-button>
+			<md-button ng-click="showFilters=true">
+				<md-icon class="mdi mdi-magnify"></md-icon>
+				Filter ads
+			</md-button>			
+		</div>
+	</md-toolbar>
+	
+	
+	<div class="filters" layout="row" layout-align="center center" ng-show="showFilters">
+		<md-input-container>
+			<p>
+			<label>Enter your filter</label>
+			<input type="text" ng-model="classifiedsFilter" />
+			<!--
+				filter sieves through the data that is not displayed, too, eg "vehicles":
+				the category exists, but it's not shown anywhere
+			-->
+			</p>
+		</md-input-container>
+		<md-input-container>
+			<p>
+			<label>Category</label>
+			<md-select ng-model="category">
+				<md-option ng-repeat="category in vm.categories" value="{{category}}">
+					{{category}}
+				</md-option>
+			</md-select>
+			</p>
+		</md-input-container>
+		<div layout="row">
+			<md-button class="md-warn" ng-click="classifiedsFilter='';category='';">Clear</md-button>
+		</div>		
+	</div>
+
+	
+	
+	
+	<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+		<md-toolbar>
+			<h1 class="md-toolbar-tools">Add your ad</h1>
+		</md-toolbar>
+		<md-content layout-padding>
+			<form>
+				<md-input-container>
+					<label for="title">Title</label>
+					<input type="text" id="title" ng-model="classified.title" md-autofocus>
+				</md-input-container>
+				<md-input-container>
+					<label for="price">Price</label>
+					<input type="text" id="price" ng-model="classified.price">
+				</md-input-container>
+				<md-input-container>
+					<label for="description">Description</label>
+					<textarea type="text" id="description" ng-model="classified.description"></textarea>
+				</md-input-container>
+				<md-input-container>
+					<label for="image">Image link</label>
+					<input type="text" id="image" ng-model="classified.image">
+				</md-input-container>
+				<md-button ng-if="!editing" class="md-primary" ng-click="vm.saveClassified(classified);">Save</md-button>
+				<md-button ng-if="editing" class="md-primary" ng-click="vm.saveEdit(classified);">Save edit</md-button>
+				<md-button class="md-warn" ng-click="vm.closeSidebar()">Cancel</md-button>
+				<pre>{{ classified | json }}</pre>
+			</form>
+		</md-content>
+		
+	</md-sidenav>
+	
+	<md-content class="md-padding" layout="row" layout-wrap>
+		<md-card ng-repeat="classified in vm.classifieds | filter:classifiedsFilter | filter:category" flex="30" class="classified">
+			<img ng-src="{{classified.image}}" alt="" />
+			<md-card-content>
+				<div class="classified-info" ng-show="!showContact">
+					<h2 class="md-title">{{classified.title}}</h2>
+					<h5>{{classified.posted | date:'longDate'}}</h5>
+					<h3>{{classified.price | currency}}</h3>
+					<p>{{classified.description}}</p>
+					<md-button ng-click="showContact=true">Show contact info</md-button>
+				</div>
+				
+
+				
+				<div class="classified-contact" ng-show="showContact">
+					<ul>
+						<li>
+							<md-icon class="mdi mdi-account"></md-icon>
+							{{classified.contact.name}}
+						</li>
+						<li>
+							<md-icon class="mdi mdi-phone"></md-icon>
+							{{classified.contact.phone}}
+						</li>
+						<li>
+							<md-icon class="mdi mdi-email"></md-icon>
+							{{classified.contact.email}}
+						</li>
+					</ul>
+					<md-button ng-click="showContact=false">Show details</md-button>
+				</div>
+				
+				
+				<div class="classified-admin" ng-if="showAdmin">
+					<h3>Admin</h3>
+					<div layout="row">
+						<md-button ng-click="vm.editClassified(classified);" class="md-primary">Edit</md-button>
+						<md-button class="md-warn" ng-click="vm.deleteClassified($event, classified);">Delete</md-button>
+					</div>
+				</div>
+				
+				<div layout="row">
+					<md-button ng-click="showAdmin=true" ng-show="!showAdmin">Show admin</md-button>
+					<md-button ng-click="showAdmin=false" ng-show="showAdmin">Hide admin</md-button>
+				</div>
+			</md-card-content>
+		</md-card>
+	</md-content>
