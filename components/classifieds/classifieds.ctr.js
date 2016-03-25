@@ -4,7 +4,7 @@
 
   angular
     .module('ngClassifieds')
-    .controller('classifiedsController', function($scope, $mdToast, $mdSidenav, $mdDialog, $state, $stateParams, classifiedsFactory) {
+    .controller('classifiedsController', function($scope, $mdToast, $mdSidenav, $mdDialog, $state, $stateParams, classifiedsFactory, $http) {
 
       var vm = this;
 
@@ -13,12 +13,26 @@
       vm.deleteClassified = deleteClassified;
       vm.showSearchBar = false;
       vm.showFilters = false;
+	  vm.classifieds = classifiedsFactory.ref;
 
-      classifiedsFactory.getClassifieds().then(function(data) {
+/*
+		classifiedsFactory.getClassifieds().then(function(data) {
         vm.classifieds = data.data;
         vm.categories = getCategories(vm.classifieds);
       });
-
+*/
+	  
+	  /*
+	  $http.get('https://api.github.com/users').then(function(response){
+		  console.log(response);
+	  });
+	  
+	  Other options:
+		  $http.post('url')
+		  $http.put('url')
+		  $http.delete('url')
+	  */
+	  
       $scope.$on('newClassified', function(event, data) {
         data.id = vm.classifieds.length + 1;
         vm.classifieds.push(data);
@@ -80,7 +94,7 @@
 
         return _.uniq(categories);
       }
-
+	  
     });
 
 })();
